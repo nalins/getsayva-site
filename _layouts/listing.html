@@ -5,46 +5,25 @@ layout: default
 <section class="section listing">
   <div class="container">
 
-    <!-- Header -->
     <header class="listing-header">
-      <div class="listing-title-row">
-        <h1 class="listing-title">{{ page.title }}</h1>
-        {% if page.status %}<span class="listing-badge">{{ page.status }}</span>{% endif %}
-      </div>
-
-      {% if page.subtitle %}
-        <p class="listing-subtitle">{{ page.subtitle }}</p>
-      {% endif %}
+      <h1 class="listing-title">{{ page.title }}</h1>
     </header>
 
-    <!-- Hero -->
     {% if page.hero %}
       <figure class="listing-hero-wrap">
         <img class="listing-hero" src="{{ page.hero | relative_url }}" alt="{{ page.title }}">
       </figure>
     {% endif %}
 
-    <!-- Gallery thumbs (Squarespace-like) -->
-    {% if page.gallery %}
-      <section class="listing-gallery">
-        {% for img in page.gallery %}
-          <a class="listing-thumb" href="{{ img | relative_url }}">
-            <img src="{{ img | relative_url }}" alt="{{ page.title }} photo {{ forloop.index }}">
-          </a>
-        {% endfor %}
-      </section>
-    {% endif %}
-
-    <!-- Body: left content + right details -->
     <section class="listing-main">
       <article class="listing-content">
         <div class="listing-prose">
           {{ content }}
         </div>
 
-        {% if page.calendly_url or site.calendly_url %}
+        {% if page.booking_url %}
           <div class="listing-cta">
-            <a class="btn-cta" href="{{ page.calendly_url | default: site.calendly_url }}">Book a showing</a>
+            <a class="btn-cta" href="{{ page.booking_url | relative_url }}">Book a showing</a>
           </div>
         {% endif %}
       </article>
@@ -67,23 +46,25 @@ layout: default
       </aside>
     </section>
 
-    <!-- Map (optional) -->
-    {% if page.map_embed %}
-      <section class="listing-map">
-        {{ page.map_embed }}
-      </section>
-    {% elsif page.map_lat and page.map_lng %}
+    {% if page.map_embed_url %}
       <section class="listing-map">
         <iframe
-          title="Map"
-          width="100%"
-          height="420"
-          style="border:0;filter:grayscale(100%);"
+          title="{{ page.title }} map"
+          src="{{ page.map_embed_url | relative_url }}"
           loading="lazy"
           allowfullscreen
-          referrerpolicy="no-referrer-when-downgrade"
-          src="https://www.google.com/maps?q={{ page.map_lat }},{{ page.map_lng }}&z=15&output=embed">
+          referrerpolicy="no-referrer-when-downgrade">
         </iframe>
+      </section>
+    {% endif %}
+
+    {% if page.gallery %}
+      <section class="listing-gallery">
+        {% for img in page.gallery %}
+          <a class="listing-thumb" href="{{ img | relative_url }}">
+            <img src="{{ img | relative_url }}" alt="{{ page.title }} photo {{ forloop.index }}">
+          </a>
+        {% endfor %}
       </section>
     {% endif %}
 
