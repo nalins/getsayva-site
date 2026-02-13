@@ -1,7 +1,7 @@
 title: SAYVA Real Estate
 description: Selfless service. Honest advice.
-url: "https://getsayva.com"
-baseurl: ""
+url: "https://nalins.github.io"
+baseurl: "/getsayva-site"   # IMPORTANT for nalins.github.io/getsayva-site
 
 calendly_url: "https://calendly.com/"
 
