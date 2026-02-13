@@ -1,0 +1,15 @@
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="{{ '/' | relative_url }}">
+      <img class="brand-logo" src="{{ '/assets/images/Sayva-logo-02.webp' | relative_url }}" alt="SAYVA Real Estate">
+    </a>
+    <nav class="nav">
+      {% for path in site.header_pages %}
+        {% assign p = site.pages | where: "path", path | first %}
+        {% if p %}
+          <a class="nav-link" href="{{ p.url | relative_url }}">{{ p.title }}</a>
+        {% endif %}
+      {% endfor %}
+    </nav>
+  </div>
+</header>

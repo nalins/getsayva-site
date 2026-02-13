@@ -1,0 +1,91 @@
+---
+layout: default
+---
+
+<section class="section listing">
+  <div class="container">
+
+    <!-- Header -->
+    <header class="listing-header">
+      <div class="listing-title-row">
+        <h1 class="listing-title">{{ page.title }}</h1>
+        {% if page.status %}<span class="listing-badge">{{ page.status }}</span>{% endif %}
+      </div>
+
+      {% if page.subtitle %}
+        <p class="listing-subtitle">{{ page.subtitle }}</p>
+      {% endif %}
+    </header>
+
+    <!-- Hero -->
+    {% if page.hero %}
+      <figure class="listing-hero-wrap">
+        <img class="listing-hero" src="{{ page.hero | relative_url }}" alt="{{ page.title }}">
+      </figure>
+    {% endif %}
+
+    <!-- Gallery thumbs (Squarespace-like) -->
+    {% if page.gallery %}
+      <section class="listing-gallery">
+        {% for img in page.gallery %}
+          <a class="listing-thumb" href="{{ img | relative_url }}">
+            <img src="{{ img | relative_url }}" alt="{{ page.title }} photo {{ forloop.index }}">
+          </a>
+        {% endfor %}
+      </section>
+    {% endif %}
+
+    <!-- Body: left content + right details -->
+    <section class="listing-main">
+      <article class="listing-content">
+        <div class="listing-prose">
+          {{ content }}
+        </div>
+
+        {% if page.calendly_url or site.calendly_url %}
+          <div class="listing-cta">
+            <a class="btn-cta" href="{{ page.calendly_url | default: site.calendly_url }}">Book a showing</a>
+          </div>
+        {% endif %}
+      </article>
+
+      <aside class="listing-details">
+        <h2 class="details-title">Details</h2>
+
+        <dl class="details-grid">
+          {% if page.price %}<div><dt>Price</dt><dd>{{ page.price }}</dd></div>{% endif %}
+          {% if page.bedrooms %}<div><dt>Bedrooms</dt><dd>{{ page.bedrooms }}</dd></div>{% endif %}
+          {% if page.bathrooms %}<div><dt>Bathrooms</dt><dd>{{ page.bathrooms }}</dd></div>{% endif %}
+          {% if page.property_type %}<div><dt>Type</dt><dd>{{ page.property_type }}</dd></div>{% endif %}
+          {% if page.parking %}<div><dt>Parking</dt><dd>{{ page.parking }}</dd></div>{% endif %}
+          {% if page.status %}<div><dt>Status</dt><dd>{{ page.status }}</dd></div>{% endif %}
+        </dl>
+
+        {% if page.address %}
+          <div class="details-address">{{ page.address }}</div>
+        {% endif %}
+      </aside>
+    </section>
+
+    <!-- Map (optional) -->
+    {% if page.map_embed %}
+      <section class="listing-map">
+        {{ page.map_embed }}
+      </section>
+    {% elsif page.map_lat and page.map_lng %}
+      <section class="listing-map">
+        <iframe
+          title="Map"
+          width="100%"
+          height="420"
+          style="border:0;filter:grayscale(100%);"
+          loading="lazy"
+          allowfullscreen
+          referrerpolicy="no-referrer-when-downgrade"
+          src="https://www.google.com/maps?q={{ page.map_lat }},{{ page.map_lng }}&z=15&output=embed">
+        </iframe>
+      </section>
+    {% endif %}
+
+  </div>
+</section>

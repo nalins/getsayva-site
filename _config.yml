@@ -1,0 +1,25 @@
+title: SAYVA Real Estate
+description: Selfless service. Honest advice.
+url: "https://getsayva.com"
+baseurl: ""
+
+calendly_url: "https://calendly.com/"
+
+collections:
+  listings:
+    output: true
+    permalink: /listings/:name/
+
+defaults:
+  - scope:
+      path: ""
+      type: "listings"
+    values:
+      layout: "listing"
+
+header_pages:
+  - buy-sell.md
+  - leasing-101.md
+  - listings.md
+  - about.md
+  - contact.md
